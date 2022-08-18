@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Routes, Route } from "react-router-dom";
+import Home from "../views/Home";
 
 import Orders from "../views/Orders";
 import Products from "../views/Products";
@@ -10,6 +11,16 @@ function Dashboard() {
     <div className="dashboard">
       <section className="dashboard-content">
         <Routes>
+          <Route
+            exact
+            index
+            path="/"
+            element={
+              <>
+                <Home />
+              </>
+            }
+          />
           <Route
             exact
             index

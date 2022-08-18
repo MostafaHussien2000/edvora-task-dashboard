@@ -222,9 +222,41 @@ nav.side-nav #close-nav {
   background: #fff;
   padding: 40px;
   border-radius: 30px;
+  overflow: hidden;
+  max-width: 900px;
 }
-/* .dashboard .dashboard-content {
-} */
+
+/* Home View
+============ */
+.home-view {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+}
+.home-view a {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background: rgb(231, 227, 237);
+  border-radius: 25px;
+}
+.home-view a svg {
+  width: 70px;
+  transform: scale(1.5);
+}
+.home-view a svg path {
+  stroke: var(--accent-color);
+}
+.home-view a p {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 20px;
+}
 
 /* Products View
 ================ */
