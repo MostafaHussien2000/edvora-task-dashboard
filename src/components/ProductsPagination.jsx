@@ -1,9 +1,12 @@
 import ProductsTable from "./ProductsTable";
 
 import ReactPaginate from "react-paginate";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import ProductsContext from "../context/productsContext";
 
-function ProductsPagination({ products = [] }) {
+function ProductsPagination() {
+  const { products } = useContext(ProductsContext);
+
   // We start with an empty list of items.
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
@@ -27,7 +30,7 @@ function ProductsPagination({ products = [] }) {
 
   return (
     <>
-      <ProductsTable products={currentItems} />
+      <ProductsTable currentItems={currentItems} />
       <div className="products-table-pagination">
         <ReactPaginate
           breakLabel={"..."}

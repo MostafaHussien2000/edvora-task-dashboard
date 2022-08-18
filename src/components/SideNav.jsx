@@ -1,17 +1,48 @@
 import logo from "../assets/logo.png";
 
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
-function SideNav({ isOpen }) {
+function SideNav({ isOpen, setIsOpen }) {
   return (
     <nav className={`side-nav ${isOpen ? "open" : ""}`} id="side-nav">
       <div className="container">
         <div className="logo">
           <img src={logo} alt="Shopieeee logo" />
+          <button id="close-nav" onClick={() => setIsOpen(false)}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="29.698"
+              height="29.698"
+              viewBox="0 0 29.698 29.698"
+            >
+              <g
+                id="Group_10"
+                data-name="Group 10"
+                transform="translate(-1288.651 -981.651)"
+              >
+                <path
+                  id="Line_2"
+                  data-name="Line 2"
+                  d="M34,2H0A2,2,0,0,1-2,0,2,2,0,0,1,0-2H34a2,2,0,0,1,2,2A2,2,0,0,1,34,2Z"
+                  transform="translate(1291.479 984.479) rotate(45)"
+                  fill="#7d1dbc"
+                />
+                <path
+                  id="Line_3"
+                  data-name="Line 3"
+                  d="M34,2H0A2,2,0,0,1-2,0,2,2,0,0,1,0-2H34a2,2,0,0,1,2,2A2,2,0,0,1,34,2Z"
+                  transform="translate(1315.521 984.479) rotate(135)"
+                  fill="#7d1dbc"
+                />
+              </g>
+            </svg>
+          </button>
         </div>
         <ul className="navigation">
           <li>
             <NavLink
+              onClick={() => setIsOpen(false)}
               to="/products"
               className={({ isActive }) =>
                 `side-nav__link ${isActive ? "active" : ""}`
@@ -68,6 +99,7 @@ function SideNav({ isOpen }) {
           </li>
           <li>
             <NavLink
+              onClick={() => setIsOpen(false)}
               to="/orders"
               className={({ isActive }) =>
                 `side-nav__link ${isActive ? "active" : ""}`

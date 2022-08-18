@@ -1,31 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import UsersContext from "../context/usersContext";
 import Loading from "./Loading";
 
 function Users() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  const fetchUsers = async () => {
-    const response = await fetch("https://assessment.api.vweb.app/users");
-
-    return response.json();
-  };
-
-  useEffect(() => {
-    setLoading(true);
-
-    fetchUsers()
-      .then((data) => {
-        setLoading(false);
-        setError(false);
-        setUsers(data);
-      })
-      .catch((err) => {
-        setError(true);
-        console.error(err);
-      });
-  }, []);
+  const { users, loading, error, querriedUsers, setQueriedUsers } =
+    useContext(UsersContext);
 
   const genRandomColor = () => {
     const heu = Math.ceil(Math.random() * 360);
@@ -39,7 +18,17 @@ function Users() {
     <div className="users-panel">
       <p>All Users</p>
       <div className="search-area">
-        <input type="text" />
+        <input
+          type="text"
+          placeholder="Search by User Name ..."
+          onChange={(e) => {
+            setQueriedUsers(
+              users.filter((user) =>
+                user.name.toLowerCase().includes(e.target.value.toLowerCase())
+              )
+            );
+          }}
+        />
         <button>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -86,22 +75,24 @@ function Users() {
           <center>
             <p className="server-error-tag">Server error.</p>
           </center>
-        ) : users.length > 0 ? (
+        ) : users?.length > 0 && querriedUsers?.length > 0 ? (
           <ul>
-            {users.map((user) => (
+            {querriedUsers?.map((user) => (
               <li key={user.user_id}>
                 <p
                   className="icon"
                   style={{ backgroundColor: genRandomColor() }}
                 >
-                  {user.name.split(" ")[0][0] + user.name.split(" ")[1][0]}
+                  {user?.name?.split(" ")[0][0] + user?.name?.split(" ")[1][0]}
                 </p>
-                <p className="name">{user.name}</p>
+                <p className="name">{user?.name}</p>
               </li>
             ))}
           </ul>
         ) : (
-          <p>No Users found.</p>
+          <center>
+            <p>No Users found.</p>
+          </center>
         )}
       </div>
     </div>

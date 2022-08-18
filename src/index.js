@@ -6,11 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter } from "react-router-dom";
 
+import { ProductsProvider } from "./context/productsContext";
+import { OrdersProvider } from "./context/ordersContext";
+import { UsersProvider } from "./context/usersContext";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <ProductsProvider>
+        <OrdersProvider>
+          <UsersProvider>
+            <App />
+          </UsersProvider>
+        </OrdersProvider>
+      </ProductsProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

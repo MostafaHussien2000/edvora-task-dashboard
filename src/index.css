@@ -15,7 +15,7 @@
   box-sizing: border-box;
   list-style: none;
   text-decoration: none;
-  font-family: "Montserrate", "Poppins", "Segoe UI", Tahoma, Geneva, Verdana,
+  font-family: "Montserrat", "Poppins", "Segoe UI", Tahoma, Geneva, Verdana,
     sans-serif;
   color: var(--dark-text-color);
 }
@@ -125,6 +125,9 @@ nav.side-nav .container .navigation li a.side-nav__link.active * {
   color: #fff;
   stroke: #fff;
 }
+nav.side-nav #close-nav {
+  display: none;
+}
 
 /* Loading 
 ========== */
@@ -225,12 +228,12 @@ nav.side-nav .container .navigation li a.side-nav__link.active * {
 
 /* Products View
 ================ */
-.products-view h1 {
+.products-view > h1 {
   padding: 10px 25px;
   position: relative;
   margin: 20px 0px;
 }
-.products-view h1::before {
+.products-view > h1::before {
   content: "";
   position: absolute;
   display: block;
@@ -241,8 +244,48 @@ nav.side-nav .container .navigation li a.side-nav__link.active * {
   background: var(--accent-color);
   border-radius: 6px;
 }
+.products-view .states {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.products-view .states .state {
+  background: #f3e9f9;
+  padding: 15px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+.products-view .states .state .icon {
+  width: 80px;
+  height: 80px;
+  background: var(--accent-color);
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.products-view .states .state .text h1 {
+  color: var(--accent-color);
+  font-size: 22px;
+}
 .products-view table {
+  display: inline-block;
   width: 100%;
+  overflow-y: scroll;
+  margin: auto;
+  max-height: 420px;
+}
+.products-view table::-webkit-scrollbar {
+  width: 8px;
+  background: rgb(245, 243, 248);
+  border-radius: 15px;
+}
+
+.products-view table::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 5px;
 }
 .products-view table thead tr td {
   font-size: 18px;
@@ -405,6 +448,110 @@ nav.side-nav .container .navigation li a.side-nav__link.active * {
   color: var(--dark-text-color);
 }
 
+/* Orders View
+============== */
+.orders-view .charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.orders-view .charts .chart {
+  background: #f3e9f9;
+  padding: 15px;
+  border-radius: 20px;
+}
+.orders-view canvas {
+  all: unset !important;
+  width: 100% !important;
+  margin: auto !important;
+  display: block !important;
+  aspect-ratio: 3 / 2 !important;
+  font-size: 15px !important;
+}
+.orders-view > h1 {
+  padding: 10px 25px;
+  position: relative;
+  margin: 20px 0px;
+}
+.orders-view > h1::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 15px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: var(--accent-color);
+  border-radius: 6px;
+}
+.orders-view .orders-list {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  overflow-x: scroll;
+  padding: 15px 0px;
+}
+.orders-view .orders-list::-webkit-scrollbar {
+  height: 8px;
+  background: rgb(245, 243, 248);
+  border-radius: 15px;
+}
+.orders-view .orders-list::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 5px;
+}
+.orders-view .orders-list .order-card {
+  min-width: 350px;
+  background: #f3e9f9;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.orders-view .orders-list .order-card > * {
+  width: 100%;
+}
+.orders-view .orders-list .order-card table tr td:first-of-type {
+  color: #c699e1;
+}
+.orders-view .orders-list .order-card table tr td:last-of-type {
+  color: var(--accent-color);
+  font-size: 18px;
+  font-weight: 500;
+}
+.orders-view .orders-list .order-card .bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 8px 0px;
+}
+.orders-view .orders-list .order-card .bottom p {
+  color: #c699e1;
+  text-align: right;
+}
+.orders-view .orders-list .order-card .bottom .price p:last-of-type {
+  color: var(--accent-color);
+  font-size: 20px;
+  font-weight: 500;
+}
+.orders-view .orders-list .order-card .actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+.orders-view .orders-list .order-card .actions button {
+  height: 40px;
+  border-radius: 15px;
+  border: none;
+  color: #fff;
+  background: var(--danger-color);
+  cursor: pointer;
+}
+.orders-view .orders-list .order-card .actions button:first-of-type {
+  background: #5ed97b;
+}
 /*===============================================*/
 /*===============================================*/
 /*===============================================*/
@@ -423,6 +570,7 @@ nav.side-nav .container .navigation li a.side-nav__link.active * {
     margin: 10px 0px;
     padding: 0px 20px;
   }
+
   .app-heading button {
     display: flex;
   }
@@ -437,20 +585,67 @@ nav.side-nav .container .navigation li a.side-nav__link.active * {
     z-index: 500;
     min-height: 100vh;
     box-shadow: 40px 0px 20px rgba(0, 0, 0, 0.149);
+    transition: transform 0.2s ease;
     transform: translateX(-150%);
+    padding: 10px 0px;
   }
   nav.side-nav.open {
     transform: translateX(0px);
   }
+  nav.side-nav.open::backdrop {
+    background: #000;
+  }
+  nav.side-nav .logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav.side-nav #close-nav {
+    width: 60px;
+    aspect-ratio: 1 / 1;
+    border-radius: 15px;
+    border: none;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 }
 
-@media only screen and (max-width: 1430px) {
+@media only screen and (max-width: 1070px) {
   body {
     overflow: scroll;
   }
   .App {
     display: flex;
     flex-direction: column;
+  }
+  .dashboard .dashboard-content {
+    padding: 20px;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+  .dashboard .dashboard-content .states {
+    grid-template-columns: 1fr;
+  }
+
+  /* Products View
+  ================ */
+  .orders-view .charts {
+    grid-template-columns: 1fr;
+  }
+  .orders-view .charts .chart canvas {
+    width: 80% !important;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .app-heading {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 10px;
   }
 }
 

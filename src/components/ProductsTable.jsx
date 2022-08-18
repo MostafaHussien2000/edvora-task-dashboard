@@ -1,7 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
-function ProductsTable({ products }) {
-  useEffect(() => {}, [products]);
+import ProductsContext from "../context/productsContext";
+
+function ProductsTable({ currentItems }) {
+  const { products, setProducts } = useContext(ProductsContext);
+
   return (
     <table cellPadding="0" cellSpacing="0" border="0">
       <thead>
@@ -14,8 +17,8 @@ function ProductsTable({ products }) {
         </tr>
       </thead>
       <tbody>
-        {products?.map((prod) => (
-          <tr key={prod.product_id}>
+        {currentItems?.map((prod) => (
+          <tr key={prod.product_id} id={prod.product_id}>
             <td>{prod.product_id}</td>
             <td>{prod.name}</td>
             <td className={parseInt(prod.stock) < 25 ? "low-stock" : ""}>
@@ -23,7 +26,20 @@ function ProductsTable({ products }) {
             </td>
             <td>${prod.selling_price}</td>
             <td>
-              <button>
+              <button
+                onClick={(e) => {
+                  if (
+                    window.confirm(
+                      `Do you really want to delete ${prod.name} from products`
+                    )
+                  ) {
+                    const deletedId = parseInt(prod.product_id);
+                    setProducts((list) =>
+                      list.filter((target) => target.product_id !== deletedId)
+                    );
+                  }
+                }}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16.665"
